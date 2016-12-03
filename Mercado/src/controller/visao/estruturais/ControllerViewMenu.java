@@ -3,6 +3,7 @@ package controller.visao.estruturais;
 import java.awt.event.ActionEvent;
 import controller.visao.ControllerView;
 import visao.cadastro.ViewCadastroProduto;
+import visao.cadastro.ViewCadastroDespesa;
 import visao.consulta.ViewConsultaProduto;
 import visao.estruturais.ViewMenu;
 
@@ -31,7 +32,8 @@ public class ControllerViewMenu extends ControllerView {
             new ViewCadastroProduto(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaProduto())) {
             new ViewConsultaProduto(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroDespesa())) {
+            new ViewCadastroDespesa(this.viewMenu).setVisible(true);
         }
     }
-    
 }

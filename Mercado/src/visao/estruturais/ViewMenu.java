@@ -11,6 +11,7 @@ import controller.visao.estruturais.ControllerViewMenu;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
+import modelo.estruturais.Usuario;
 
 /**
  * <p>Classe de Visao <b>ViewMenu.</b></p>
@@ -75,20 +76,18 @@ public class ViewMenu extends View {
     private JMenuItem menuItemSistemaLogoff;
     private JMenuItem menuItemSistemaSair;
     
-    
+    private final Usuario usuario;
     
     /**
      * Metodo constutor padrao responsavel por inicializar os componentes.
      */
     
-    
-    public ViewMenu() {
+    public ViewMenu(Usuario oUsuario) {
         super();
         this.controller = new ControllerViewMenu(this);
+        this.usuario    = oUsuario;
         this.addKeyListener(this.controller);
         this.initComponents();
-        
-        
     }
     
     /**
@@ -428,4 +427,7 @@ public class ViewMenu extends View {
         return this.menuItemSistemaSair;
     }
     
+    public Usuario getUsuario() {
+        return this.usuario;
+    }    
 }

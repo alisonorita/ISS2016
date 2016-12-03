@@ -15,9 +15,7 @@ import visao.ViewModal;
 
 /**
  * Classe responsavel por definir a Interface de Operacoes do Sistema.
- * @author  Leandro
- * @version 1.0
- * @since   28/12/2015
+ * @author  Alison
  */
 public abstract class ViewOperacao extends ViewModal implements InterfaceView {
     private JTable            jTable;

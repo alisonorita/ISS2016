@@ -4,6 +4,7 @@ import funct.FunctFrame;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
 import visao.InterfaceView;
 import visao.View;
 import visao.ViewModal;
@@ -117,6 +118,10 @@ public abstract class ViewCadastro extends ViewModal implements InterfaceView {
      */
     public JButton getButtonAjuda() {
         return this.jButtonAjuda;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
     }
     
 }
