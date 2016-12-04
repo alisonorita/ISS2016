@@ -14,8 +14,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * <p>Classe responsavel por configurar o BD com os Relatorios.</p>
- * @author Leandro
- * @since  13/02/2016
+ * @author Alison
  */
 public class Relatorio {
     private   static final String     url            = "jdbc:mysql://localhost:3306/mercado";
