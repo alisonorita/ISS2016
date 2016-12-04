@@ -2,10 +2,26 @@ package controller.visao.estruturais;
 
 import java.awt.event.ActionEvent;
 import controller.visao.ControllerView;
+import java.io.IOException;
+import java.sql.SQLException;
+import net.sf.jasperreports.engine.JRException;
+import relatorios.Relatorio;
+import relatorios.RelatorioDespesas;
+import visao.cadastro.ViewCadastroClienteFisico;
+import visao.cadastro.ViewCadastroClienteJuridico;
 import visao.cadastro.ViewCadastroProduto;
 import visao.cadastro.ViewCadastroDespesa;
+import visao.cadastro.ViewCadastroFornecedor;
+import visao.cadastro.ViewCadastroMarca;
+import visao.cadastro.ViewCadastroUsuario;
+import visao.consulta.ViewConsultaCliente;
+import visao.consulta.ViewConsultaFornecedor;
+import visao.consulta.ViewConsultaMarca;
 import visao.consulta.ViewConsultaProduto;
 import visao.estruturais.ViewMenu;
+import visao.mensagens.ViewErro;
+import visao.operacoes.ViewOperacaoGerenciarProduto;
+import visao.operacoes.ViewOperacaoRegistrarPedido;
 
 
 /**
@@ -28,12 +44,39 @@ public class ControllerViewMenu extends ControllerView {
     @Override
     public void actionPerformed(ActionEvent oEvento) {
         
-        if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroProduto())) {
+        if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroUsuario())) {
+            new ViewCadastroUsuario(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroProduto())) {
             new ViewCadastroProduto(this.viewMenu).setVisible(true);
-        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaProduto())) {
-            new ViewConsultaProduto(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroDespesa())) {
             new ViewCadastroDespesa(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroClienteFisico())) {
+            new ViewCadastroClienteFisico(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroClienteJuridico())) {
+            new ViewCadastroClienteJuridico(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroFornecedor())) {
+            new ViewCadastroFornecedor(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroMarca())) {
+            new ViewCadastroMarca(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaProduto())) {
+            new ViewConsultaProduto(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaCliente())) {
+            new ViewConsultaCliente(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaFornecedor())) {
+            new ViewConsultaFornecedor(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaMarca())) {
+            new ViewConsultaMarca(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesRegistrarPedido())) {
+            new ViewOperacaoRegistrarPedido(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesGerenciarProduto())) {
+            new ViewOperacaoGerenciarProduto(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosDespesa())) {
+            try {
+                Relatorio oRelatorio = new RelatorioDespesas();
+            } catch (JRException | IOException | SQLException ex) {
+                new ViewErro(this.viewMenu, "Erro na Geracao do Relatorio!").setVisible(true);
+            }
         }
+        
     }
 }

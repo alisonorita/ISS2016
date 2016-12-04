@@ -3,6 +3,8 @@
   <persistence-unit name="UP" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.cadastrais.Produto</class>
+    <class>modelo.gerenciais.Marca</class>
+    <class>modelo.gerenciais.Fornecedor</class>
     <class>modelo.cadastrais.Cliente</class>
     <class>modelo.cadastrais.ClienteFisico</class>
     <class>modelo.cadastrais.ClienteJuridico</class>
@@ -11,11 +13,10 @@
     <class>modelo.estruturais.Operacao</class>
     <class>modelo.estruturais.Usuario</class>
     <class>modelo.gerenciais.Despesa</class>
-    <class>modelo.gerenciais.Fornecedor</class>
     <class>modelo.gerenciais.Funcionario</class>
-    <class>modelo.gerenciais.Marca</class>
     <class>modelo.relacionais.entrada.Entrada</class>
     <class>modelo.relacionais.entrada.ItemPedido</class>
+    <class>modelo.relacionais.entrada.Pedido</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mercado?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

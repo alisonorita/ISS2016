@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import modelo.dao.cadastrais.DaoProduto;
 import visao.mensagens.ViewMensagem;
 import visao.remover.ViewRemoverProduto;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewRemoverProduto.
@@ -36,6 +39,7 @@ public class ControllerViewRemoverProduto extends ControllerViewRemover {
     @Override
     protected void remover() {
         new DaoProduto().remove(this.viewRemoverProduto.getProduto().getId());
+        new DaoOperacao().insert(new Operacao("Produto = " + this.viewRemoverProduto.getProduto().getId(), new DaoAcao().get(27L), this.viewRemoverProduto.getUsuario()));
         new ViewMensagem(this.viewRemoverProduto.getViewConsulta(), "Produto Removido com Sucesso!").setVisible(true);
         this.viewRemoverProduto.getViewConsulta().clear();
         this.viewRemoverProduto.dispose();

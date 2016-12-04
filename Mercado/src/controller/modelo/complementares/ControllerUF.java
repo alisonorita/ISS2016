@@ -5,8 +5,6 @@ import modelo.dao.complementares.DaoUF;
 /**
  * Classe responsavel por ser o <b>controlador</b> da Classe de Entidade UF.
  * @author  Hadyne
- * @version 1.0
- * @since   09/11/2015
  * @see     modelo.complementares.UF
  */
 public class ControllerUF {

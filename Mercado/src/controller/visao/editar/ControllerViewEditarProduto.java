@@ -8,6 +8,9 @@ import modelo.dao.cadastrais.DaoProduto;
 import visao.editar.ViewEditarProduto;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewEditarProduto.
@@ -57,6 +60,7 @@ public class ControllerViewEditarProduto extends ControllerViewEditar {
                     oProduto.setQuantidade(iQuantidade);
                     oProduto.setPrecoUnitario(fPrecoUnitario);
             this.daoProduto.update(oProduto);
+            new DaoOperacao().insert(new Operacao("Produto = " + oProduto.getId(), new DaoAcao().get(26L), this.viewEditarProduto.getUsuario()));
             new ViewMensagem(this.viewEditarProduto, "Produto Atualizado com Sucesso!").setVisible(true);
             this.viewEditarProduto.dispose();
             this.viewEditarProduto.getViewConsultaProduto().clear();

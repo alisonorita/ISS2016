@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import visao.InterfaceView;
 import visao.ViewModal;
 import visao.consulta.ViewConsulta;
+import modelo.estruturais.Usuario;
 
 /**
  * Classe responsavel por definir a Interface de Edicao do Sistema.
@@ -82,6 +83,10 @@ public abstract class ViewEditar extends ViewModal implements InterfaceView {
      */
     public JButton getButtonAjuda() {
         return this.jButtonAction3;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewConsulta.getUsuario();
     }
     
 }

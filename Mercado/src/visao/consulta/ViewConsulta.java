@@ -14,6 +14,7 @@ import visao.InterfaceView;
 import visao.View;
 import visao.ViewModal;
 import visao.estruturais.ViewMenu;
+import modelo.estruturais.Usuario;
 
 /**
  * Classe responsavel por definir a Interface de Consulta do Sistema.
@@ -239,6 +240,10 @@ public abstract class ViewConsulta extends ViewModal implements InterfaceView {
      */
     public JButton getButtonAjuda() {
         return this.jButtonAjuda;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
     }
     
 }

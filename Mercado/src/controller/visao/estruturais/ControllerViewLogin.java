@@ -5,7 +5,14 @@ import funct.FunctString;
 import java.awt.event.ActionEvent;
 import controller.visao.ControllerView;
 import java.awt.event.KeyEvent;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.dao.estruturais.DaoUsuario;
+import modelo.estruturais.Operacao;
+import modelo.estruturais.Usuario;
 import visao.estruturais.ViewLogin;
+import visao.estruturais.ViewMenu;
+import visao.mensagens.ViewErro;
 
 
 /**
@@ -15,6 +22,7 @@ import visao.estruturais.ViewLogin;
  */
 public class ControllerViewLogin extends ControllerView {
     private final ViewLogin   viewLogin;
+    private final DaoUsuario  daoUsuario;
     private final FunctString functString;
     
     /**
@@ -24,6 +32,7 @@ public class ControllerViewLogin extends ControllerView {
     public ControllerViewLogin(ViewLogin oView) {
         super(oView);
         this.viewLogin   = oView;
+        this.daoUsuario  = new DaoUsuario();
         this.functString = new FunctString();
     }
 
@@ -54,7 +63,20 @@ public class ControllerViewLogin extends ControllerView {
     private void login() {
         String  sLogin   = this.viewLogin.getTextFieldLogin().getText();
         String  sSenha   = this.viewLogin.getTextFieldSenha().getText();
-        
+        Usuario oUsuario = this.daoUsuario.findUsuarioByLogin(sLogin);
+        if (oUsuario != null) {
+            if (this.functString.md5(sSenha).equals(oUsuario.getSenha())) {
+                this.viewLogin.dispose();
+                new DaoOperacao().insert(new Operacao("Login pela View", new DaoAcao().get(1L), oUsuario));
+                new ViewMenu(oUsuario).setVisible(true);
+            }else {
+                new ViewErro(this.viewLogin, "Senha Incorreta!").setVisible(true);
+                this.viewLogin.getTextFieldSenha().requestFocus();
+            }
+        }else {
+            new ViewErro(this.viewLogin, "Usuário não encontrado!").setVisible(true);
+            this.viewLogin.getTextFieldLogin().requestFocus();
+        }
         
     }
 }

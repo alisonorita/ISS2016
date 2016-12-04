@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import visao.ViewModal;
 import visao.consulta.ViewConsulta;
+import modelo.estruturais.Usuario;
 
 /**
  * Classe responsavel por definir a Interface de Remocao do Sistema.
@@ -51,6 +52,11 @@ public abstract class ViewRemover extends ViewModal {
     
     public ViewConsulta getViewConsulta() {
         return this.viewConsulta;
+    }
+    
+    
+    public Usuario getUsuario() {
+        return this.viewConsulta.getUsuario();
     }
     
 }

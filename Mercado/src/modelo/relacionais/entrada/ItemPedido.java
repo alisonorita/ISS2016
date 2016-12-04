@@ -27,6 +27,9 @@ public class ItemPedido implements Serializable {
     @Column (name = "id")
     private Long   id;
     @ManyToOne
+    @JoinColumn (name = "pedido_id")
+    private Pedido  pedido;
+    @ManyToOne
     @JoinColumn (name = "produto_id")
     private Produto produto;
     @Column (name = "quantidade")
@@ -38,7 +41,21 @@ public class ItemPedido implements Serializable {
         this.id = null;
     }
     
+    public ItemPedido(Pedido oPedido, Produto oProduto, int iQuantidade, float fPrecoUnitario) {
+        this();
+        this.pedido        = oPedido;
+        this.produto       = oProduto;
+        this.quantidade    = (iQuantidade >= 0)      ? iQuantidade    : 0;
+        this.precoUnitario = (fPrecoUnitario >= 0.0) ? fPrecoUnitario : 0.0f;
+    }
+    
+    public Pedido getPedido() {
+        return this.pedido;
+    }
 
+    public void setPedido(Pedido oPedido) {
+        this.pedido = oPedido;
+    }
 
     public Long getId() {
         return this.id;

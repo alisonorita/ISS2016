@@ -8,6 +8,9 @@ import modelo.dao.cadastrais.DaoProduto;
 import visao.cadastro.ViewCadastroProduto;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewCadastroProduto.
@@ -53,6 +56,7 @@ public class ControllerViewCadastroProduto extends ControllerViewCadastro {
             Produto oProduto       = new Produto(sDescricao, sMarca, sPeso, iQuantidade, fPrecoUnitario);
             this.daoProduto.insert(oProduto);
             this.viewCadastroProduto.clear();
+            new DaoOperacao().insert(new Operacao("Produto = " + oProduto.getId(), new DaoAcao().get(25L), this.viewCadastroProduto.getUsuario()));
             new ViewMensagem(this.viewCadastroProduto, "Produto Cadastrado com Sucesso!").setVisible(true);
         }
     }

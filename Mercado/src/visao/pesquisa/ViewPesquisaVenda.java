@@ -8,8 +8,6 @@ import visao.operacoes.ViewOperacaoEfetuarDevolucao;
 /**
  * Classe responsavel por definir a Interface de Pesquisa de Vendas no Sistema.
  * @author  Hadyne
- * @version 1.0
- * @since   17/01/2016
  */
 public final class ViewPesquisaVenda extends ViewPesquisa {
     private final ViewOperacaoEfetuarDevolucao viewParent;
