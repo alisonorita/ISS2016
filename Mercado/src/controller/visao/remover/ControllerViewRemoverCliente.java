@@ -3,6 +3,9 @@ package controller.visao.remover;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 import visao.mensagens.ViewMensagem;
 import visao.remover.ViewRemoverCliente;
 
@@ -36,6 +39,7 @@ public class ControllerViewRemoverCliente extends ControllerViewRemover {
     @Override
     protected void remover() {
         new DaoCliente().remove(this.viewRemoverCliente.getCliente().getId());
+        new DaoOperacao().insert(new Operacao("Cliente = " + this.viewRemoverCliente.getCliente().getId(), new DaoAcao().get(18L), this.viewRemoverCliente.getUsuario()));
         new ViewMensagem(this.viewRemoverCliente.getViewConsulta(), "Cliente Removido com Sucesso!").setVisible(true);
         this.viewRemoverCliente.getViewConsulta().clear();
         this.viewRemoverCliente.dispose();

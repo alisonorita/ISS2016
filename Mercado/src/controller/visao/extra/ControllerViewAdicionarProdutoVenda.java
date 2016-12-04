@@ -4,9 +4,10 @@ import controller.Controller;
 import funct.FunctString;
 import java.awt.event.ActionEvent;
 import modelo.cadastrais.Produto;
+import modelo.relacionais.saida.ItemVenda;
 import visao.extra.ViewAdicionarProdutoVenda;
 import visao.mensagens.ViewErro;
-
+import visao.pesquisa.ViewPesquisaProduto;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewAdicionarProdutoVenda.
@@ -49,7 +50,7 @@ public class ControllerViewAdicionarProdutoVenda extends Controller {
     @Override
     public void actionPerformed(ActionEvent oActionEvent) {
         if (oActionEvent.getSource().equals(this.viewAdicionarProdutoVenda.getButtonSearchProduto()) == true) {
-           
+            new ViewPesquisaProduto(this.viewAdicionarProdutoVenda).setVisible(true);
         }else if (oActionEvent.getSource().equals(this.viewAdicionarProdutoVenda.getButtonAdicionar()) == true) {
             Produto oProduto       = this.viewAdicionarProdutoVenda.getProduto();
             String  sQuantidade    = this.viewAdicionarProdutoVenda.getTextFieldQuantidade().getText().trim();
@@ -57,14 +58,18 @@ public class ControllerViewAdicionarProdutoVenda extends Controller {
             if (this.checkParameters(sQuantidade, sPrecoUnitario)) {
                 int   iQuantidade    = Integer.parseInt(sQuantidade);
                 float fPrecoUnitario = Float.parseFloat(sPrecoUnitario);
-               
-            
+                ItemVenda oItemVenda = new ItemVenda(null, oProduto, iQuantidade, fPrecoUnitario);
+                if ((oProduto.getQuantidade() >= iQuantidade) 
+                        && (this.viewAdicionarProdutoVenda.getViewParent().checkQuantidade(oItemVenda))) {
+                    this.viewAdicionarProdutoVenda.getViewParent().addItemVenda(oItemVenda);
                     this.viewAdicionarProdutoVenda.dispose();
                 }else {
                     new ViewErro(this.viewAdicionarProdutoVenda, "Quantidade Solicitada Maior que o Estoque!").setVisible(true);
                     this.viewAdicionarProdutoVenda.getTextFieldQuantidade().requestFocus();
                 }
             }
-        
+        }else if (oActionEvent.getSource().equals(this.viewAdicionarProdutoVenda.getButtonBack()) == true) {
+            this.viewAdicionarProdutoVenda.dispose();
+        }
     }    
 }

@@ -3,6 +3,7 @@ package visao.remover;
 import funct.FunctFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
 import visao.ViewModal;
 import visao.consulta.ViewConsulta;
 import modelo.estruturais.Usuario;

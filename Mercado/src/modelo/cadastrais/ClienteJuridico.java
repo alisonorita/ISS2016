@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import modelo.complementares.Cidade;
 
 /**
  * <p>Classe de <b>Modelo</b> ClienteJuridico.</p>
@@ -21,7 +22,8 @@ public class ClienteJuridico extends Cliente implements Serializable {
         super();
     }
     
-    public ClienteJuridico(String sDocumento, String sNome, String sTelefone, String sCelular, String eEmail, String sEndereco, String sRazaoSocial, String sResponsavel) {
+    public ClienteJuridico(String sDocumento, String sNome, String sTelefone, String sCelular, String eEmail, String sEndereco, Cidade oCidade, String sRazaoSocial, String sResponsavel) {
+        super(sDocumento, sNome, sTelefone, sCelular, eEmail, sEndereco, oCidade);
         this.razaoSocial = sRazaoSocial.toUpperCase().trim();
         this.responsavel = sResponsavel.toUpperCase().trim();
     }

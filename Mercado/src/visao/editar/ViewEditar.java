@@ -3,6 +3,7 @@ package visao.editar;
 import funct.FunctFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
 import visao.InterfaceView;
 import visao.ViewModal;
 import visao.consulta.ViewConsulta;
@@ -88,5 +89,5 @@ public abstract class ViewEditar extends ViewModal implements InterfaceView {
     public Usuario getUsuario() {
         return this.viewConsulta.getUsuario();
     }
-    
+
 }

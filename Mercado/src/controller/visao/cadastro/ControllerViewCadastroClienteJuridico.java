@@ -3,7 +3,13 @@ package controller.visao.cadastro;
 import controller.modelo.cadastrais.ControllerCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import modelo.cadastrais.ClienteJuridico;
+import modelo.complementares.Cidade;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.dao.complementares.DaoCidade;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 import visao.cadastro.ViewCadastroClienteJuridico;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
@@ -52,7 +58,11 @@ public class ControllerViewCadastroClienteJuridico extends ControllerViewCadastr
         String sCelular     = this.viewCadastroClienteJuridico.getTextFieldCelular().getText().toUpperCase().trim();
         String sEmail       = this.viewCadastroClienteJuridico.getTextFieldEmail().getText().trim();
         if (this.checkParameters(sCnpj, sNome, sResponsavel, sTelefone) == true) {
+            Cidade          oCidade        = new DaoCidade().findCidadeByNome(sCidade);
+            ClienteJuridico oClienteJuridico = new ClienteJuridico(sCnpj, sNome, sTelefone, sCelular, sEmail, sEndereco, oCidade, sRazaoSocial, sResponsavel);
+            this.daoCliente.insert(oClienteJuridico);
             this.viewCadastroClienteJuridico.clear();
+            new DaoOperacao().insert(new Operacao("Cliente Juridico = " + oClienteJuridico.getId(), new DaoAcao().get(16L), this.viewCadastroClienteJuridico.getUsuario()));
             new ViewMensagem(this.viewCadastroClienteJuridico, "Cliente Cadastrado com Sucesso!").setVisible(true);
         }
     }

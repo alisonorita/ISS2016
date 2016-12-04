@@ -1,15 +1,19 @@
 package controller.visao.estruturais;
 
-
+import modelo.dao.estruturais.DaoUsuario;
 import funct.FunctString;
 import java.awt.event.ActionEvent;
+import modelo.estruturais.Usuario;
 import controller.visao.ControllerView;
 import java.awt.event.KeyEvent;
 import modelo.dao.estruturais.DaoAcao;
 import modelo.dao.estruturais.DaoOperacao;
+
 import modelo.dao.estruturais.DaoUsuario;
 import modelo.estruturais.Operacao;
 import modelo.estruturais.Usuario;
+import modelo.estruturais.Operacao;
+
 import visao.estruturais.ViewLogin;
 import visao.estruturais.ViewMenu;
 import visao.mensagens.ViewErro;
@@ -64,6 +68,7 @@ public class ControllerViewLogin extends ControllerView {
         String  sLogin   = this.viewLogin.getTextFieldLogin().getText();
         String  sSenha   = this.viewLogin.getTextFieldSenha().getText();
         Usuario oUsuario = this.daoUsuario.findUsuarioByLogin(sLogin);
+
         
         if (oUsuario != null) {
             if (this.functString.md5(sSenha).equals(oUsuario.getSenha())) {
@@ -79,5 +84,8 @@ public class ControllerViewLogin extends ControllerView {
             this.viewLogin.getTextFieldLogin().requestFocus();
         }
         
+
+        
+
     }
 }

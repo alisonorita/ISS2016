@@ -62,4 +62,5 @@ public class ControllerViewPesquisaProduto extends ControllerViewModal {
             this.viewPesquisaProduto.getTextFieldPesquisa().requestFocus();
         }
     }
+
 }

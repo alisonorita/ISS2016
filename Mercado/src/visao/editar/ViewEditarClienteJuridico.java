@@ -6,6 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import modelo.cadastrais.ClienteJuridico;
+import modelo.dao.complementares.DaoCidade;
 import visao.consulta.ViewConsultaCliente;
 
 /**
@@ -91,7 +92,10 @@ public final class ViewEditarClienteJuridico extends ViewEditar {
         
         this.addLinhas(1);
         
+        String[] sCidades    = new DaoCidade().getCidades();
+        this.jComboBoxCidade = new JComboBox(sCidades);
         this.jComboBoxCidade.addKeyListener(this.controller);
+        this.jComboBoxCidade.setSelectedItem(this.clienteJuridico.getCidade().toString());
         this.jComboBoxCidade.setPreferredSize(new Dimension(370, 20));
         this.add(new JLabel("Cidade: "));
         this.add(this.jComboBoxCidade);

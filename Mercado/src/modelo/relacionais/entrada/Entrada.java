@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -27,6 +28,8 @@ public class Entrada implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "entrada_generator")
     @Column (name = "id")
     private Long   id;
+    @OneToOne
+    private Pedido pedido;
     @Column (name = "nota_fiscal")
     private String notaFiscal;
     @Column (name = "data_cadastro")
@@ -41,7 +44,12 @@ public class Entrada implements Serializable {
         this.horaCadastro = new FunctDate().getCurrentTime();
     }
     
-
+    public Entrada(Pedido oPedido, String sNotaFiscal) {
+        this();
+        this.pedido     = oPedido;
+        this.notaFiscal = sNotaFiscal.toUpperCase().trim();
+        this.pedido.setRecebido(true);
+    }
 
     public Long getId() {
         return this.id;
@@ -51,7 +59,13 @@ public class Entrada implements Serializable {
         this.id = lId;
     }
 
+    public Pedido getPedido() {
+        return this.pedido;
+    }
 
+    public void setPedido(Pedido oPedido) {
+        this.pedido = oPedido;
+    }
 
     public String getNotaFiscal() {
         return this.notaFiscal;
@@ -85,4 +99,8 @@ public class Entrada implements Serializable {
         return Objects.equals(this.id, oEntrada.getId());
     }
 
+    @Override
+    public String toString() {
+        return this.pedido.toString() + " " + new FunctDate().getFormattedDate(this.dataCadastro);
+    }
 }

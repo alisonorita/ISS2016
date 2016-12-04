@@ -48,6 +48,7 @@ public class ItemPedido implements Serializable {
         this.quantidade    = (iQuantidade >= 0)      ? iQuantidade    : 0;
         this.precoUnitario = (fPrecoUnitario >= 0.0) ? fPrecoUnitario : 0.0f;
     }
+
     
     public Pedido getPedido() {
         return this.pedido;
@@ -57,6 +58,7 @@ public class ItemPedido implements Serializable {
         this.pedido = oPedido;
     }
 
+
     public Long getId() {
         return this.id;
     }
@@ -64,7 +66,6 @@ public class ItemPedido implements Serializable {
     public void setId(Long lId) {
         this.id = lId;
     }
-
 
     public Produto getProduto() {
         return this.produto;
@@ -114,4 +115,8 @@ public class ItemPedido implements Serializable {
         return Objects.equals(this.id, oItemPedido.getId());
     }
 
+    @Override
+    public String toString() {
+        return this.pedido + " - " + this.produto + " - " + this.quantidade + " - " + this.precoUnitario;
+    }
 }

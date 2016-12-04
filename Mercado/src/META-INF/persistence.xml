@@ -17,6 +17,10 @@
     <class>modelo.relacionais.entrada.Entrada</class>
     <class>modelo.relacionais.entrada.ItemPedido</class>
     <class>modelo.relacionais.entrada.Pedido</class>
+    <class>modelo.complementares.Cidade</class>
+    <class>modelo.relacionais.saida.Devolucao</class>
+    <class>modelo.relacionais.saida.ItemVenda</class>
+    <class>modelo.relacionais.saida.Venda</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mercado?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

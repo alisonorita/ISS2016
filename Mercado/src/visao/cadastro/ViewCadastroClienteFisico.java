@@ -6,6 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import modelo.dao.complementares.DaoCidade;
 import visao.View;
 
 /**
@@ -89,6 +90,8 @@ public final class ViewCadastroClienteFisico extends ViewCadastro {
         
         this.addLinhas(1);
         
+        String[] sCidades    = new DaoCidade().getCidades();
+        this.jComboBoxCidade = new JComboBox(sCidades);
         this.jComboBoxCidade.addKeyListener(this.controller);
         this.jComboBoxCidade.setPreferredSize(new Dimension(290, 20));
         this.add(new JLabel("Cidade: "));

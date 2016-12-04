@@ -3,13 +3,17 @@ package controller.visao.cadastro;
 import controller.modelo.cadastrais.ControllerCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import modelo.cadastrais.ClienteFisico;
+import modelo.complementares.Cidade;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.dao.complementares.DaoCidade;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 import visao.cadastro.ViewCadastroClienteFisico;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
 
-
-///////   VER O DE AÇÃO E OPERAÇÃO!!!!
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewCadastroClienteFisico.
@@ -60,7 +64,11 @@ public class ControllerViewCadastroClienteFisico extends ControllerViewCadastro 
         String sCelular  = this.viewCadastroClienteFisico.getTextFieldCelular().getText().toUpperCase().trim();
         String sEmail    = this.viewCadastroClienteFisico.getTextFieldEmail().getText().trim();
         if (this.checkParameters(sCpf, sNome, sTelefone) == true) {
-            this.viewCadastroClienteFisico.clear();           
+            Cidade        oCidade        = new DaoCidade().findCidadeByNome(sCidade);
+            ClienteFisico oClienteFisico = new ClienteFisico(sCpf, sNome, sTelefone, sCelular, sEmail, sEndereco, oCidade, sRg, cSexo);
+            this.daoCliente.insert(oClienteFisico);
+            this.viewCadastroClienteFisico.clear();
+            new DaoOperacao().insert(new Operacao("Cliente Fisico = " + oClienteFisico.getId(), new DaoAcao().get(16L), this.viewCadastroClienteFisico.getUsuario()));
             new ViewMensagem(this.viewCadastroClienteFisico, "Cliente Cadastrado com Sucesso!").setVisible(true);
         }
     }

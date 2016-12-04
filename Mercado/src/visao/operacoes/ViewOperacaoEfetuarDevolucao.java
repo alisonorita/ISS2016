@@ -6,6 +6,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import modelo.dao.relacionais.saida.DaoItemVenda;
+import modelo.estruturais.Usuario;
+import modelo.relacionais.saida.ItemVenda;
+import modelo.relacionais.saida.Venda;
 import visao.View;
 import visao.estruturais.ViewMenu;
 
@@ -20,6 +24,10 @@ public final class ViewOperacaoEfetuarDevolucao extends ViewOperacao {
     private JTextField jTextFieldTotalItens;
     private JTextField jTextFieldValorTotal;
 
+    private Venda        venda;
+    private DaoItemVenda daoItemVenda;
+    
+    private List<ItemVenda> itens;
     
     private final ViewMenu viewMenu;
     
@@ -27,6 +35,7 @@ public final class ViewOperacaoEfetuarDevolucao extends ViewOperacao {
         super(oViewParent);
         this.viewMenu   = (ViewMenu) oViewParent;
         this.controller = new ControllerViewOperacaoEfetuarDevolucao(this);
+        this.itens      = new ArrayList<>();
         this.initComponents();
     }
 
@@ -97,6 +106,8 @@ public final class ViewOperacaoEfetuarDevolucao extends ViewOperacao {
     
     @Override
     public void clear() {
+        this.venda = null;
+        this.itens = new ArrayList<>();
         
         this.jTextFieldVenda.setText("");
         this.jTextFieldTotalItens.setText("0");
@@ -120,6 +131,27 @@ public final class ViewOperacaoEfetuarDevolucao extends ViewOperacao {
         return this.jButtonAction3;
     }
 
-  
+    public List<ItemVenda> getItens() {
+        return this.itens;
+    }
+    
+    public Venda getVenda() {
+        return this.venda;
+    }
 
+    public void setVenda(Venda oVenda) {
+        this.daoItemVenda = new DaoItemVenda();
+        this.venda        = oVenda;
+        this.itens        = this.daoItemVenda.getItens(oVenda);
+        
+        this.addRows(this.daoItemVenda.getItensVenda(this.itens));
+        
+        this.jTextFieldVenda.setText(this.venda.toString());
+        this.jTextFieldTotalItens.setText(Integer.toString(oVenda.getNumeroItens()));
+        this.jTextFieldValorTotal.setText(Float.toString(oVenda.getValorTotal()));
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
+    }
 }

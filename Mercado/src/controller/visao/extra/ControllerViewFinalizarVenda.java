@@ -5,7 +5,16 @@ import funct.FunctDate;
 import funct.FunctString;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.util.List;
+import modelo.cadastrais.Produto;
 import modelo.dao.cadastrais.DaoProduto;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.dao.relacionais.saida.DaoItemVenda;
+import modelo.dao.relacionais.saida.DaoVenda;
+import modelo.estruturais.Operacao;
+import modelo.relacionais.saida.ItemVenda;
+import modelo.relacionais.saida.Venda;
 import visao.extra.ViewFinalizarVenda;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
@@ -18,11 +27,15 @@ import visao.mensagens.ViewMensagem;
 public class ControllerViewFinalizarVenda extends Controller {
     private final ViewFinalizarVenda viewFinalizarVenda;
     private final FunctString        functString;
+    private final DaoVenda           daoVenda;
+    private final DaoItemVenda       daoItemVenda;
     private final DaoProduto         daoProduto;
     
     public ControllerViewFinalizarVenda(ViewFinalizarVenda oView) {
         this.viewFinalizarVenda = oView;
         this.functString        = new FunctString();
+        this.daoVenda           = new DaoVenda();
+        this.daoItemVenda       = new DaoItemVenda();
         this.daoProduto         = new DaoProduto();
     }
     
@@ -69,7 +82,8 @@ public class ControllerViewFinalizarVenda extends Controller {
     @Override
     public void actionPerformed(ActionEvent oActionEvent) {
         if (oActionEvent.getSource().equals(this.viewFinalizarVenda.getButtonFinalizar()) == true) {
-           
+            Venda           oVenda          = this.viewFinalizarVenda.getVenda();
+            List<ItemVenda> oItens          = this.viewFinalizarVenda.getItensVenda();
             String          sFormaPagamento = this.viewFinalizarVenda.getComboBoxFormaPagamento().getSelectedItem().toString();
             String          sValorPago      = this.viewFinalizarVenda.getTextFieldValorPago().getText().trim();
             String          sValorDesconto  = this.viewFinalizarVenda.getTextFieldValorDesconto().getText().trim();
@@ -79,12 +93,35 @@ public class ControllerViewFinalizarVenda extends Controller {
             if (this.checkParameters(sValorPago, sValorDesconto, sDataEncomenda) == true) {
                 float fValorPago     = Float.parseFloat(sValorPago);
                 float fValorDesconto = Float.parseFloat(sValorDesconto);
- 
+                float fValorFinal    = oVenda.getValorTotal() - fValorDesconto;
+                float fValorTroco    = fValorPago - fValorFinal;
+                if (this.checkValores(oVenda.getValorTotal(), fValorPago, fValorDesconto) == true) {
+                    this.viewFinalizarVenda.getTextFieldValorDesconto().setText(Float.toString(fValorTroco));
+                    oVenda.setFormaPagamento(sFormaPagamento);
+                    oVenda.setValorPago(fValorPago);
+                    oVenda.setValorDesconto(fValorDesconto);
+                    oVenda.setValorTroco(fValorTroco);
+                    oVenda.setEncomenda(bEncomenda);
+                    oVenda.setDataEntrega(dEncomenda);
+                    oVenda.setEntrega(false);
+                    this.daoVenda.insert(oVenda);
+                    
+                    for (int i = 0; i < oItens.size(); ++i) {
+                        oItens.get(i).setVenda(oVenda);
+                        this.daoItemVenda.insert(oItens.get(i));
+                        Produto oProduto = oItens.get(i).getProduto();
+                                oProduto.setQuantidade(oProduto.getQuantidade() - oItens.get(i).getQuantidade());
+                        this.daoProduto.update(oProduto);
+                    }
+                    
+                    new DaoOperacao().insert(new Operacao("Venda = " + oVenda.getId(), new DaoAcao().get(31L), this.viewFinalizarVenda.getViewParent().getUsuario()));
                     new ViewMensagem(this.viewFinalizarVenda, "Venda realizada com Sucesso!").setVisible(true);
                     this.viewFinalizarVenda.dispose();
                     this.viewFinalizarVenda.getViewParent().clear();
                 }
             }
-
+        }else if (oActionEvent.getSource().equals(this.viewFinalizarVenda.getButtonCancelar()) == true) {
+            this.viewFinalizarVenda.dispose();
+        }
     }
 }

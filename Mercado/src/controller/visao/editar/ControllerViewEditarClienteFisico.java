@@ -4,7 +4,12 @@ import controller.modelo.cadastrais.ControllerCliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import modelo.cadastrais.ClienteFisico;
+import modelo.complementares.Cidade;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.dao.complementares.DaoCidade;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
 import visao.editar.ViewEditarClienteFisico;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
@@ -58,17 +63,20 @@ public class ControllerViewEditarClienteFisico extends ControllerViewEditar {
         String sCelular  = this.viewEditarClienteFisico.getTextFieldCelular().getText().toUpperCase().trim();
         String sEmail    = this.viewEditarClienteFisico.getTextFieldEmail().getText().trim();
         if (this.checkParameters(sCpf, sNome, sTelefone) == true) {
-           ClienteFisico oClienteFisico = this.viewEditarClienteFisico.getClienteFisico();
+            Cidade        oCidade        = new DaoCidade().findCidadeByNome(sCidade);
+            ClienteFisico oClienteFisico = this.viewEditarClienteFisico.getClienteFisico();
                           oClienteFisico.setDocumento(sCpf);
                           oClienteFisico.setRg(sRg);
                           oClienteFisico.setNome(sNome);
                           oClienteFisico.setSexo(cSexo);
                           oClienteFisico.setEndereco(sEndereco);
+                          oClienteFisico.setCidade(oCidade);
                           oClienteFisico.setTelefone(sTelefone);
                           oClienteFisico.setCelular(sCelular);
                           oClienteFisico.setEmail(sEmail);
             this.daoCliente.update(oClienteFisico);
-           new ViewMensagem(this.viewEditarClienteFisico, "Cliente Atualizado com Sucesso!").setVisible(true);
+            new DaoOperacao().insert(new Operacao("Cliente Fisico = " + oClienteFisico.getId(), new DaoAcao().get(17L), this.viewEditarClienteFisico.getUsuario()));
+            new ViewMensagem(this.viewEditarClienteFisico, "Cliente Atualizado com Sucesso!").setVisible(true);
             this.viewEditarClienteFisico.dispose();
             this.viewEditarClienteFisico.getViewConsultaCliente().clear();
         }

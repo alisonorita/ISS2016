@@ -1,5 +1,6 @@
 package modelo.cadastrais;
 
+import modelo.complementares.Cidade;
 import funct.FunctDate;
 import java.io.Serializable;
 import java.sql.Time;
@@ -10,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -39,6 +42,9 @@ public class Cliente implements Serializable {
     private String email;
     @Column (name = "endereco")
     private String endereco;
+    @ManyToOne
+    @JoinColumn (name = "cidade_id")
+    private Cidade cidade;
     @Column (name = "data_cadastro")
     @Temporal(javax.persistence.TemporalType.DATE)
     private final Date dataCadastro;
@@ -57,12 +63,13 @@ public class Cliente implements Serializable {
         this.nome      = sNome.toUpperCase().trim();
     }
     
-    public Cliente(String sDocumento, String sNome, String sTelefone, String sCelular, String sEmail, String sEndereco) {
+    public Cliente(String sDocumento, String sNome, String sTelefone, String sCelular, String sEmail, String sEndereco, Cidade oCidade) {
         this(sDocumento, sNome);
         this.telefone = sTelefone;
         this.celular  = sCelular;
         this.email    = sEmail;
         this.endereco = sEndereco.toUpperCase().trim();
+        this.cidade   = oCidade;
     }
     
     public Long getId() {
@@ -119,6 +126,14 @@ public class Cliente implements Serializable {
 
     public void setEndereco(String sEndereco) {
         this.endereco = sEndereco.toUpperCase().trim();
+    }
+
+    public Cidade getCidade() {
+        return this.cidade;
+    }
+
+    public void setCidade(Cidade oCidade) {
+        this.cidade = oCidade;
     }
 
     public Date getDataCadastro() {

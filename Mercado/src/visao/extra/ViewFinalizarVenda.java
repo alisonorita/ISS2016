@@ -6,11 +6,14 @@ import controller.visao.extra.ControllerViewFinalizarVenda;
 import funct.FunctDate;
 import funct.FunctFrame;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import modelo.relacionais.saida.ItemVenda;
+import modelo.relacionais.saida.Venda;
 import visao.InterfaceView;
 import visao.ViewModal;
 import visao.operacoes.ViewOperacaoEfetuarVenda;
@@ -31,14 +34,17 @@ public final class ViewFinalizarVenda extends ViewModal implements InterfaceView
     private JTextField jTextFieldValorTroco;
     private JCheckBox  jCheckBoxEncomenda;
     private JTextField jTextFieldDataEncomenda;
-
+    private final Venda           venda;
+    private final List<ItemVenda> itensVenda;
     private final ViewOperacaoEfetuarVenda viewParent;
     
 
-    public ViewFinalizarVenda(ViewModal oView) {
+    public ViewFinalizarVenda(ViewModal oView, Venda oVenda, List<ItemVenda> oItensVenda) {
         super(oView);
         this.controller = new ControllerViewFinalizarVenda(this);
         this.viewParent = (ViewOperacaoEfetuarVenda) oView;
+        this.venda      = oVenda;
+        this.itensVenda = oItensVenda;
         this.initComponents();
     }
 
@@ -63,7 +69,7 @@ public final class ViewFinalizarVenda extends ViewModal implements InterfaceView
     public void addComponents() {
         this.jTextCliente            = this.createTextField(20);
         this.jTextCliente.setEditable(false);
-       
+        this.jTextCliente.setText(this.venda.getCliente().toString());
         this.add(new JLabel("Cliente: "));
         this.add(this.jTextCliente);
         
@@ -78,7 +84,7 @@ public final class ViewFinalizarVenda extends ViewModal implements InterfaceView
         this.addLinhas(1);
         
         this.jTextFieldValorTotal = this.createTextField(5);
-       
+        this.jTextFieldValorTotal.setText(Float.toString(this.venda.getValorTotal()));
         this.jTextFieldValorTotal.setEditable(false);
         this.add(new JLabel("      Valor Total: "));
         this.add(this.jTextFieldValorTotal);
@@ -86,7 +92,7 @@ public final class ViewFinalizarVenda extends ViewModal implements InterfaceView
         this.addLinhas(1);
         
         this.jTextFieldValorPago     = this.createTextField(5);
-       
+        this.jTextFieldValorPago.setText(Float.toString(this.venda.getValorTotal()));
         this.add(new JLabel("       Valor Pago: "));
         this.add(this.jTextFieldValorPago);
         
@@ -157,6 +163,13 @@ public final class ViewFinalizarVenda extends ViewModal implements InterfaceView
         return this.jTextFieldDataEncomenda;
     }
 
+    public Venda getVenda() {
+        return this.venda;
+    }
+
+    public List<ItemVenda> getItensVenda() {
+        return this.itensVenda;
+    }
 
     public JButton getButtonFinalizar() {
         return this.jButtonAction1;

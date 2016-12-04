@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import modelo.cadastrais.ClienteFisico;
+import modelo.dao.complementares.DaoCidade;
 import visao.consulta.ViewConsultaCliente;
 
 /**
@@ -103,7 +104,10 @@ public final class ViewEditarClienteFisico extends ViewEditar {
         
         this.addLinhas(1);
         
+        String[] sCidades    = new DaoCidade().getCidades();
+        this.jComboBoxCidade = new JComboBox(sCidades);
         this.jComboBoxCidade.addKeyListener(this.controller);
+        this.jComboBoxCidade.setSelectedItem(this.clienteFisico.getCidade().toString());
         this.jComboBoxCidade.setPreferredSize(new Dimension(290, 20));
         this.add(new JLabel("Cidade: "));
         this.add(this.jComboBoxCidade);

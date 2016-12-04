@@ -1,6 +1,6 @@
 package modelo.cadastrais;
 
-
+import modelo.complementares.Cidade;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -22,7 +22,8 @@ public class ClienteFisico extends Cliente implements Serializable {
         super();
     }
     
-    public ClienteFisico(String sDocumento, String sNome, String sTelefone, String sCelular, String sEmail, String sEndereco, String sRg, char cSexo) {
+    public ClienteFisico(String sDocumento, String sNome, String sTelefone, String sCelular, String sEmail, String sEndereco, Cidade oCidade, String sRg, char cSexo) {
+        super(sDocumento, sNome, sTelefone, sCelular, sEmail, sEndereco, oCidade);
         this.rg   = sRg;
         this.sexo = cSexo;
     }
