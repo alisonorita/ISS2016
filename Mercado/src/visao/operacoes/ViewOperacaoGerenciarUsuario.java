@@ -1,0 +1,124 @@
+package visao.operacoes;
+
+import controller.visao.operacoes.ControllerViewOperacaoGerenciarUsuario;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
+import modelo.estruturais.Usuario;
+import visao.View;
+
+/**
+ * Classe responsavel por definir a Interface de Gerenciamento de Usuarios do Sistema.
+ * @author  Rafael
+ * @version 1.0
+ * @since   28/12/2015
+ */
+public final class ViewOperacaoGerenciarUsuario extends ViewOperacao {
+    private JTextField jTextFieldUsuario;
+    private JButton    jButtonSearchUsuario;
+    
+    private Usuario    usuario;
+    
+    private List<Operacao> operacoes;
+    private final DaoOperacao daoOperacao;
+    
+    public ViewOperacaoGerenciarUsuario(View oViewParent) {
+        super(oViewParent);
+        this.controller  = new ControllerViewOperacaoGerenciarUsuario(this);
+        this.operacoes   = new ArrayList<>();
+        this.daoOperacao = new DaoOperacao();
+        this.initComponents();
+    }
+
+    @Override
+    public void initComponents() {
+        this.setTitle("Mercado - Gerenciar Usuario");
+        this.setSize(450, 450);
+        this.setLocation(370, 155);
+        this.addHeader();
+        this.addComponents();
+        this.addButtons();
+        this.clear();
+    }
+    
+    @Override
+    public void addHeader() {
+        super.addHeader("gerenciar_usuario.jpg");
+    }
+
+    @Override
+    public void addComponents() {
+        this.jTextFieldUsuario    = this.createTextField(25);
+        this.jTextFieldUsuario.setEditable(false);
+        this.jButtonSearchUsuario = this.createButton("", "search2.jpg");
+        this.add(new JLabel("Usuario: "));
+        this.add(this.jTextFieldUsuario);
+        this.add(this.jButtonSearchUsuario);
+        
+        this.addLinhas(1);
+        
+        this.addTable();
+        
+        String[] sColumns = {"Data", "Hora", "Operacao"};
+        this.setColumns(sColumns);
+        this.jScrollPane.setPreferredSize(new Dimension(350, 150));
+        
+        int[]    iColumns = {20, 10, 40};
+        this.setColumnSize(iColumns);
+        
+        this.addLinhas(1);
+    }
+    
+    @Override
+    public void addButtons() {
+        this.jButtonAction1 = this.createButton("   Ok   ", "ok.jpg");
+        this.jButtonAction2 = this.createButton(" Voltar ", "back.jpg");
+        this.jButtonAction3 = this.createButton(""        , "help.jpg");
+        
+        this.add(this.jButtonAction1);
+        this.add(this.jButtonAction2);
+        this.add(this.jButtonAction3);
+    }
+
+    @Override
+    public void clear() {
+        this.usuario   = null;
+        this.operacoes = new ArrayList<>();
+        
+        this.jTextFieldUsuario.setText("");
+        this.clearTable();
+    }
+
+    public JButton getButtonSearchUsuario() {
+        return this.jButtonSearchUsuario;
+    }
+
+    public JButton getButtonOk() {
+        return this.jButtonAction1;
+    }
+
+    @Override
+    public JButton getButtonBack() {
+        return this.jButtonAction2;
+    }
+    
+    public JButton getButtonAjuda() {
+        return this.jButtonAction3;
+    }
+    
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(Usuario oUsuario) {
+        this.usuario   = oUsuario;
+        this.jTextFieldUsuario.setText(this.usuario.toString());
+        this.operacoes = this.daoOperacao.findOperacoesByUsuario(this.usuario);
+        this.addRows(this.daoOperacao.getOperacoes(this.operacoes));
+    }
+}

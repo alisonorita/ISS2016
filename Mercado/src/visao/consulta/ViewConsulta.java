@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import modelo.estruturais.Usuario;
 import visao.InterfaceView;
 import visao.View;
 import visao.ViewModal;
@@ -239,6 +240,10 @@ public abstract class ViewConsulta extends ViewModal implements InterfaceView {
      */
     public JButton getButtonAjuda() {
         return this.jButtonAjuda;
+    }
+
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
     }
     
 }
