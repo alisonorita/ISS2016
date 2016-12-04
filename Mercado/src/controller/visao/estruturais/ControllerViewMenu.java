@@ -31,8 +31,10 @@ import visao.consulta.ViewConsultaDespesa;
 import visao.consulta.ViewConsultaUsuario;
 import visao.estruturais.ViewMenu;
 import visao.mensagens.ViewErro;
+import visao.operacoes.ViewOperacaoChegadaPedido;
 import visao.operacoes.ViewOperacaoEfetuarDevolucao;
 import visao.operacoes.ViewOperacaoEfetuarVenda;
+import visao.operacoes.ViewOperacaoGerenciarEncomenda;
 
 import visao.operacoes.ViewOperacaoGerenciarProduto;
 import visao.operacoes.ViewOperacaoRegistrarPedido;
@@ -99,6 +101,10 @@ public class ControllerViewMenu extends ControllerView {
             new ViewOperacaoGerenciarProduto(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesGerenciarUsuario())) {
             new ViewOperacaoGerenciarUsuario(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesGerenciarEncomenda())) {
+            new ViewOperacaoGerenciarEncomenda(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesChegadaPedido())) {
+            new ViewOperacaoChegadaPedido(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosProdutosMaisVendidos())) {
             try {
                 Relatorio oRelatorio = new RelatorioProdutosMaisVendidos();
