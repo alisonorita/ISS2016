@@ -12,9 +12,7 @@ import visao.remover.ViewRemoverUsuario;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewConsultaUsuario.
- * @author  Rafael
- * @version 1.0
- * @since   29/10/2015
+ * @author  Alison
  * @see     controller.visao.consulta.ControllerViewConsulta
  */
 public class ControllerViewConsultaUsuario extends ControllerViewConsulta {

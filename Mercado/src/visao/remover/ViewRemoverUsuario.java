@@ -6,9 +6,7 @@ import visao.consulta.ViewConsultaUsuario;
 
 /**
  * Classe responsavel por definir a Interface de Remocao de um Usuario do Sistema.
- * @author  Rafael
- * @version 1.0
- * @since   03/11/2015
+ * @author  Alison
  */
 public class ViewRemoverUsuario extends ViewRemover {
     private final Usuario usuario;

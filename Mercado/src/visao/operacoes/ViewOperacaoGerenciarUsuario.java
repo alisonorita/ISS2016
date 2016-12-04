@@ -14,9 +14,7 @@ import visao.View;
 
 /**
  * Classe responsavel por definir a Interface de Gerenciamento de Usuarios do Sistema.
- * @author  Rafael
- * @version 1.0
- * @since   28/12/2015
+ * @author  Alison
  */
 public final class ViewOperacaoGerenciarUsuario extends ViewOperacao {
     private JTextField jTextFieldUsuario;

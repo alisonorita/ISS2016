@@ -11,9 +11,7 @@ import visao.remover.ViewRemoverUsuario;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewRemoverUsuario.
- * @author  Rafael
- * @version 1.0
- * @since   03/11/2015
+ * @author  Alison
  * @see     controller.visao.remover.ControllerViewRemover
  */
 public class ControllerViewRemoverUsuario extends ControllerViewRemover {

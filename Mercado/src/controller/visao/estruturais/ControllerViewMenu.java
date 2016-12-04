@@ -6,6 +6,7 @@ import visao.cadastro.ViewCadastroProduto;
 import visao.cadastro.ViewCadastroDespesa;
 import visao.cadastro.ViewCadastroUsuario;
 import visao.consulta.ViewConsultaProduto;
+import visao.consulta.ViewConsultaDespesa;
 import visao.consulta.ViewConsultaUsuario;
 import visao.estruturais.ViewMenu;
 
@@ -39,6 +40,8 @@ public class ControllerViewMenu extends ControllerView {
             new ViewConsultaProduto(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroDespesa())) {
             new ViewCadastroDespesa(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaDespesa())) {
+            new ViewConsultaDespesa(this.viewMenu).setVisible(true);
         }
     }
 }

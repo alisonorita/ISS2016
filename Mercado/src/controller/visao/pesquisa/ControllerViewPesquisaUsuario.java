@@ -11,9 +11,7 @@ import visao.pesquisa.ViewPesquisaUsuario;
 
 /**
  * Classe responsavel por definir o controlador da View de Pesquisa de Usuarios.
- * @author  Rafael
- * @version 1.0
- * @since   18/01/2016
+ * @author  Alison
  */
 public class ControllerViewPesquisaUsuario extends ControllerViewModal {
     private final ViewPesquisaUsuario viewPesquisaUsuario;

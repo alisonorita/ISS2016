@@ -9,9 +9,7 @@ import visao.consulta.ViewConsultaUsuario;
 
 /**
  * Classe responsavel por definir a Interface de Edicao de Usuarios no Sistema.
- * @author  Rafael
- * @version 1.0
- * @since   30/10/2015
+ * @author  Alison
  * @see     visao.editar.ViewEditar
  */
 public final class ViewEditarUsuario extends ViewEditar {

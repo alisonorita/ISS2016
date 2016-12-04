@@ -9,8 +9,7 @@ import visao.pesquisa.ViewPesquisaUsuario;
 
 /**
  * Metodo responsavel por ser o <b>controlador</b> da View da Chegada de Pedido.
- * @author Rafael
- * @since  16/01/2016
+ * @author Alison
  */
 public class ControllerViewOperacaoGerenciarUsuario extends ControllerViewModal {
     private final ViewOperacaoGerenciarUsuario viewOperacaoGerenciarUsuario;

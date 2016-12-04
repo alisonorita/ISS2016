@@ -6,9 +6,7 @@ import visao.ViewModal;
 
 /**
  * Classe responsavel por definir a Interface de Pesquisa de Usuarios do Sistema.
- * @author  Rafael
- * @version 1.0
- * @since   18/01/2016
+ * @author  Alison
  */
 public final class ViewPesquisaUsuario extends ViewPesquisa {
     private final ViewModal viewParent;

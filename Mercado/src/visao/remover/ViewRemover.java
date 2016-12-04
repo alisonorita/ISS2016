@@ -3,6 +3,7 @@ package visao.remover;
 import funct.FunctFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
 import visao.ViewModal;
 import visao.consulta.ViewConsulta;
 
@@ -53,4 +54,7 @@ public abstract class ViewRemover extends ViewModal {
         return this.viewConsulta;
     }
     
+    public Usuario getUsuario() {
+        return this.viewConsulta.getUsuario();
+    }
 }

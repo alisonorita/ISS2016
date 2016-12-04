@@ -14,9 +14,7 @@ import visao.mensagens.ViewMensagem;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewEditarUsuario.
- * @author  Rafael
- * @version 1.0
- * @since   30/10/2015
+ * @author  Alison
  * @see     controller.visao.editar.ControllerViewEditar
  */
 public class ControllerViewEditarUsuario extends ControllerViewEditar {
