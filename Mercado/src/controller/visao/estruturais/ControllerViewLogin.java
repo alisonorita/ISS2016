@@ -65,5 +65,19 @@ public class ControllerViewLogin extends ControllerView {
         String  sSenha   = this.viewLogin.getTextFieldSenha().getText();
         Usuario oUsuario = this.daoUsuario.findUsuarioByLogin(sLogin);
         
+        if (oUsuario != null) {
+            if (this.functString.md5(sSenha).equals(oUsuario.getSenha())) {
+                this.viewLogin.dispose();
+                new DaoOperacao().insert(new Operacao("Login pela View", new DaoAcao().get(1L), oUsuario));
+                new ViewMenu(oUsuario).setVisible(true);
+            }else {
+                new ViewErro(this.viewLogin, "Senha Incorreta!").setVisible(true);
+                this.viewLogin.getTextFieldSenha().requestFocus();
+            }
+        }else {
+            new ViewErro(this.viewLogin, "Usuário não encontrado!").setVisible(true);
+            this.viewLogin.getTextFieldLogin().requestFocus();
+        }
+        
     }
 }
