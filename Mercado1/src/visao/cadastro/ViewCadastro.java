@@ -1,0 +1,127 @@
+package visao.cadastro;
+
+import funct.FunctFrame;
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
+import visao.InterfaceView;
+import visao.View;
+import visao.ViewModal;
+import visao.estruturais.ViewMenu;
+
+/**
+ * Classe responsavel por definir a Interface de Cadastro do Sistema.
+ * @author Felippe
+ */
+public abstract class ViewCadastro extends ViewModal implements InterfaceView {
+    private   JLabel  header;
+    protected JLabel  message;
+    protected JButton jButtonAjuda;
+    private final ViewMenu viewMenu;
+
+    /**
+     * Metodo construtor, que recebe como parametro a View Parent.
+     * @param   oView View Parent
+     */
+    public ViewCadastro(View oView) {
+        super(oView);
+        this.viewMenu = (ViewMenu) oView;
+    }
+    
+    /**
+     * Metodo responsavel por adicionar o cabecalho padrao a um Frame de Cadastro.
+     * @param   sUrlImage URL do Arquivo.
+     */
+    protected void addHeader(String sUrlImage) {
+        this.addLinhas(1);
+        this.header  = new JLabel(new FunctFrame().createImage("cadastro/" + sUrlImage));
+        this.add(this.header);
+        this.addLinhas(1);
+        this.message = new JLabel();
+        this.add(this.message);
+        this.addLinhas(1);
+    }
+    
+    /**
+     * Metodo responsavel por adicionar uma Mensagem no cabecalho da View.
+     * @param   sMessage Mensagem a ser exibida.
+     */
+    public void setMessage(String sMessage) {
+        this.message.setText(sMessage);
+        this.message.setForeground(Color.black);
+    }
+    
+    /**
+     * Metodo responsavel por adicionar uma Mensagem no cabecalho da View.
+     * @param   sMessage Mensagem a ser exibida.
+     */
+    public void setErro(String sMessage) {
+        this.message.setText(sMessage);
+        this.message.setForeground(Color.red);
+    }
+    
+    /**
+     * Metodo responsavel por adicionar os botoes padroes para a View de Cadastro.
+     */
+    @Override
+    public void addButtons() {
+        this.jButtonAction1 = this.createButton(" Inserir ", "add.jpg");
+        this.jButtonAction2 = this.createButton("  Limpar ", "clear.jpg");
+        this.jButtonAction3 = this.createButton("  Voltar ", "back.jpg");
+        this.jButtonAjuda   = this.createButton(""         , "help.jpg");
+        
+        this.add(this.jButtonAction1);
+        this.add(this.jButtonAction2);
+        this.add(this.jButtonAction3);
+        this.add(this.jButtonAjuda);
+    }
+    
+    @Override
+    public abstract void initComponents();
+    
+    @Override
+    public abstract void addComponents();
+    
+    /**
+     * Metodo responsavel por limpar os componentes da View.
+     */
+    public abstract void clear();
+    
+    /**
+     * Metodo responsavel por retornar o Botao Inserir da View Cadastro.
+     * @return  JButton
+     */
+    public JButton getButtonInserir() {
+        return this.jButtonAction1;
+    }
+    
+    /**
+     * Metodo responsavel por retornar o Botao Limpar da View Cadastro.
+     * @return  JButton
+     */
+    public JButton getButtonClear() {
+        return this.jButtonAction2;
+    }
+    
+    /**
+     * Metodo responsavel por retornar o Botao Voltar da View Cadastro.
+     * @return  JButton
+     */
+    public JButton getButtonBack() {
+        return this.jButtonAction3;
+    }
+    
+    /**
+     * Metodo responsavel por retornar o Botao Ajuda da View Cadastro.
+     * @return  JButton
+     */
+    public JButton getButtonAjuda() {
+        return this.jButtonAjuda;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
+    }
+    
+}
