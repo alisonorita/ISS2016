@@ -24,7 +24,7 @@ ORDER BY data_pagamento, descricao, valor;]]>
 		<band height="83" splitType="Stretch">
 			<image>
 				<reportElement x="166" y="2" width="317" height="79" uuid="137aa3f3-b087-4e82-8648-c87a4242e499"/>
-				<imageExpression><![CDATA["C:\\Users\\AlisonK\\Documents\\Projetos Netbeans\\ISS2016\\MercadoCompleto\\src\\images\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\Users\user\Documents\NetBeansProjects\ISS2016\Mercado\src\images\logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

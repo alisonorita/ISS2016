@@ -11,13 +11,13 @@ import relatorios.RelatorioDespesas;
 import visao.cadastro.ViewCadastroClienteFisico;
 import visao.cadastro.ViewCadastroClienteJuridico;
 
-import relatorios.RelatorioProdutosEmEstoque;
 import relatorios.RelatorioProdutosMaisVendidos;
 
 import visao.cadastro.ViewCadastroProduto;
 import visao.cadastro.ViewCadastroDespesa;
 
 import visao.cadastro.ViewCadastroFornecedor;
+import visao.cadastro.ViewCadastroFuncionario;
 import visao.cadastro.ViewCadastroMarca;
 import visao.cadastro.ViewCadastroUsuario;
 import visao.consulta.ViewConsultaCliente;
@@ -28,6 +28,7 @@ import visao.cadastro.ViewCadastroUsuario;
 
 import visao.consulta.ViewConsultaProduto;
 import visao.consulta.ViewConsultaDespesa;
+import visao.consulta.ViewConsultaFuncionario;
 import visao.consulta.ViewConsultaUsuario;
 import visao.estruturais.ViewMenu;
 import visao.mensagens.ViewErro;
@@ -40,6 +41,8 @@ import visao.operacoes.ViewOperacaoGerenciarProduto;
 import visao.operacoes.ViewOperacaoRegistrarPedido;
 
 import visao.operacoes.ViewOperacaoGerenciarUsuario;
+import visao.operacoes.ViewOperacaoOrganizarHorarios;
+import visao.operacoes.ViewOperacaoRealizarNotificacao;
 import visao.sistema.ViewSistemaSobre;
 
 
@@ -69,6 +72,8 @@ public class ControllerViewMenu extends ControllerView {
             new ViewCadastroUsuario(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroDespesa())) {
             new ViewCadastroDespesa(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroFuncionario())) {
+            new ViewCadastroFuncionario(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroClienteFisico())) {
             new ViewCadastroClienteFisico(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemCadastroClienteJuridico())) {
@@ -83,6 +88,8 @@ public class ControllerViewMenu extends ControllerView {
             new ViewConsultaUsuario(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaDespesa())) {
             new ViewConsultaDespesa(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaFuncionario())) {
+            new ViewConsultaFuncionario(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaCliente())) {
             new ViewConsultaCliente(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemConsultaFornecedor())) {
@@ -103,17 +110,15 @@ public class ControllerViewMenu extends ControllerView {
             new ViewOperacaoGerenciarUsuario(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesGerenciarEncomenda())) {
             new ViewOperacaoGerenciarEncomenda(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesOrganizarHorario())) {
+            new ViewOperacaoOrganizarHorarios(this.viewMenu).setVisible(true);
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesRealizarNotificacao())) {
+            new ViewOperacaoRealizarNotificacao(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesChegadaPedido())) {
             new ViewOperacaoChegadaPedido(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosProdutosMaisVendidos())) {
             try {
                 Relatorio oRelatorio = new RelatorioProdutosMaisVendidos();
-            } catch (JRException | IOException | SQLException ex) {
-                new ViewErro(this.viewMenu, "Erro na Geracao do Relatorio!").setVisible(true);
-            } 
-        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosProdutosEstoque())) {
-            try {
-                Relatorio oRelatorio = new RelatorioProdutosEmEstoque();
             } catch (JRException | IOException | SQLException ex) {
                 new ViewErro(this.viewMenu, "Erro na Geracao do Relatorio!").setVisible(true);
             } 
