@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import modelo.cadastrais.Produto;
 import modelo.dao.relacionais.entrada.DaoItemPedido;
+import modelo.dao.relacionais.saida.DaoItemVenda;
 import visao.View;
 
 /**
@@ -20,7 +21,7 @@ public final class ViewOperacaoGerenciarProduto extends ViewOperacao {
     private JTextField    jTextFieldQuantidadeVendida;
     private Produto       produto;
     private DaoItemPedido daoItemPedido;
-   
+    private DaoItemVenda  daoItemVenda;
     private JButton       jButtonAjuda;
 
     public ViewOperacaoGerenciarProduto(View oViewParent) {
@@ -95,12 +96,13 @@ public final class ViewOperacaoGerenciarProduto extends ViewOperacao {
     public void setProduto(Produto oProduto) {
         this.produto       = oProduto;
         this.daoItemPedido = new DaoItemPedido();
+        this.daoItemVenda  = new DaoItemVenda();
         
         
         this.jTextFieldProduto.setText(this.produto.toString());
         this.jTextFieldQuantidadeComprada.setText(Integer.toString(this.daoItemPedido.getQuantidadeComprada(this.produto)));
         this.jTextFieldQuantidadeEstoque.setText(Integer.toString(this.produto.getQuantidade()));
-        
+        this.jTextFieldQuantidadeVendida.setText(Integer.toString(this.daoItemVenda.getQuantidadeVendida(this.produto)));
     }
     
     public JButton getButtonSearchProduto() {

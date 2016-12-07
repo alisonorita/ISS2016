@@ -1,5 +1,6 @@
 package visao.pesquisa;
 
+import controller.visao.pesquisa.ControllerViewPesquisaCliente;
 import javax.swing.JLabel;
 import visao.ViewModal;
 
@@ -12,12 +13,12 @@ public final class ViewPesquisaCliente extends ViewPesquisa {
 
     /**
      * Metodo constrututor herdado da superclasse.
-     * @since  09/01/2016
      * @param oViewParent 
      */
     public ViewPesquisaCliente(ViewModal oViewParent) {
         super(oViewParent);
         this.viewParent = oViewParent;
+        this.controller = new ControllerViewPesquisaCliente(this);
         this.initComponents();
     }
 
@@ -60,6 +61,7 @@ public final class ViewPesquisaCliente extends ViewPesquisa {
     public void clear() {
         this.jTextFieldPesquisa.setText("");
         this.jTextFieldPesquisa.requestFocus();
+        ((ControllerViewPesquisaCliente) this.controller).pesquisar();
         
     }
 

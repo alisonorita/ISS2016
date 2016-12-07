@@ -5,9 +5,6 @@
     <class>modelo.cadastrais.Produto</class>
     <class>modelo.gerenciais.Marca</class>
     <class>modelo.gerenciais.Fornecedor</class>
-    <class>modelo.cadastrais.Cliente</class>
-    <class>modelo.cadastrais.ClienteFisico</class>
-    <class>modelo.cadastrais.ClienteJuridico</class>
     <class>modelo.complementares.UF</class>
     <class>modelo.estruturais.Acao</class>
     <class>modelo.estruturais.Operacao</class>
@@ -21,6 +18,9 @@
     <class>modelo.relacionais.saida.Devolucao</class>
     <class>modelo.relacionais.saida.ItemVenda</class>
     <class>modelo.relacionais.saida.Venda</class>
+    <class>modelo.cadastrais.Cliente</class>
+    <class>modelo.cadastrais.ClienteFisico</class>
+    <class>modelo.cadastrais.ClienteJuridico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mercado?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

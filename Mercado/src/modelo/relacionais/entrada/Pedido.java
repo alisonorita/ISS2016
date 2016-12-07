@@ -21,11 +21,7 @@ import modelo.gerenciais.Fornecedor;
 /**
  * <p>Classe de <b>Modelo</b> Pedidos.</p>
  * <p>Classe responsavel por representar os Pedidos do Sistema.</p>
-<<<<<<< HEAD
- * @author  Marcos
-=======
  * @author  Alison
->>>>>>> origin/master
  */
 @Entity
 @Table (name = "pedido")

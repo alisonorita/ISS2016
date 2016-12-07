@@ -14,6 +14,7 @@ import visao.consulta.ViewConsultaFuncionario;
 import visao.editar.ViewEditarFuncionario;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
+import visao.operacoes.ViewOperacaoOrganizarHorarios;
 //import visao.operacoes.ViewOperacaoOrganizarHorarios;
 
 /**
@@ -47,7 +48,7 @@ public class ControllerViewEditarFuncionario extends ControllerViewEditar {
         super.keyPressed(oKeyEvent);
     }
 
-    /*@Override
+    @Override
     protected void save() {
         String sNome         = this.viewEditarFuncionario.getTextFieldNome().getText().toUpperCase().trim();
         String sCpf          = this.viewEditarFuncionario.getTextFieldCpf().getText().toUpperCase().trim();
@@ -80,7 +81,7 @@ public class ControllerViewEditarFuncionario extends ControllerViewEditar {
                 ((ViewOperacaoOrganizarHorarios) this.viewEditarFuncionario.getViewParent()).clear();
             }
         }
-    }*/
+    }
     
     private boolean checkParameters(String sNome, String sCpf, String sCargo, String sCargaHoraria, String sSalario) {
         if (this.controllerFuncionario.checkNome(sNome) == false) {
@@ -119,8 +120,4 @@ public class ControllerViewEditarFuncionario extends ControllerViewEditar {
         return true;
     }
 
-    @Override
-    protected void save() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

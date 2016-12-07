@@ -124,7 +124,7 @@ public final class ViewOperacaoRegistrarPedido extends ViewOperacao {
         this.jButtonAjuda = this.createButton("", "help.jpg");
         this.add(this.jButtonAjuda);
     }
-
+     
     @Override
     public void clear() {
         this.fornecedor = null;

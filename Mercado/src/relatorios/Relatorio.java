@@ -19,7 +19,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Relatorio {
     private   static final String     url            = "jdbc:mysql://localhost:3306/mercado";
     private   static final String     user           = "root";
-    private   static final String     password       = "root"; 
+    private   static final String     password       = "bdsenha"; 
     protected              String     relatorio      = "src/relatorios/jasper/";
     private   HashMap<String, Object> parametros = new HashMap<>();
     

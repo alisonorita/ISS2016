@@ -9,8 +9,6 @@ import modelo.relacionais.saida.Venda;
 
 /**
  * <p>Classe responsavel pelas operacoes entre a classe Venda e o BD.</p>
- * @version 1.0
- * @since   12/11/2015
  * @see     modelo.dao.Dao
  */
 public class DaoItemVenda extends Dao<ItemVenda> {
