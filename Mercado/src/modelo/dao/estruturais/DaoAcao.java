@@ -19,6 +19,7 @@ public class DaoAcao extends Dao<Acao> {
      */
     public DaoAcao() {
         super(Acao.class);
+        this.loadAcoes();
     }
     
     /**

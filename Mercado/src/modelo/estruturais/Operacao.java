@@ -100,7 +100,10 @@ public class Operacao implements Serializable {
         String[] sUsuario    = new String[3];
                  sUsuario[0] = new FunctDate().getFormattedDate(this.dia);
                  sUsuario[1] = this.hora.toString();
-                 sUsuario[2] = this.acao.getDescricao();
+                 
+                 if (this.acao != null) 
+                   sUsuario[2] = this.acao.getDescricao();
+                 
         return   sUsuario;
     }
     
