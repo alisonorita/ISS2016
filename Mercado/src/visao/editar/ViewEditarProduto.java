@@ -1,9 +1,12 @@
 package visao.editar;
 
 import controller.visao.editar.ControllerViewEditarProduto;
+import java.awt.Dimension;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import modelo.cadastrais.Produto;
+import modelo.dao.gerenciais.DaoMarca;
 import visao.consulta.ViewConsultaProduto;
 
 /**
@@ -18,6 +21,7 @@ public final class ViewEditarProduto extends ViewEditar {
     private       JTextField          jTextFieldPeso;
     private       JTextField          jTextFieldQuantidade;
     private       JTextField          jTextFieldPrecoUnitario;
+    private       JComboBox           jComboBoxMarca;
     private final ViewConsultaProduto viewConsultaProduto;
     private final Produto             produto;
 
@@ -59,10 +63,18 @@ public final class ViewEditarProduto extends ViewEditar {
         
         this.addLinhas(1);
         
-        this.jTextFieldMarca         = this.createTextField(13);
-        this.jTextFieldMarca.setText(this.produto.getMarca());
-        this.add(new JLabel("Marca*: "));
-        this.add(this.jTextFieldMarca);
+        String[] sMarcas    = new DaoMarca().getMarcas();
+        this.jComboBoxMarca = new JComboBox(sMarcas);
+        this.jComboBoxMarca.addKeyListener(this.controller);
+        if(this.produto.getMarca()==null){
+            this.jComboBoxMarca.setSelectedItem(0);
+        }else{
+            this.jComboBoxMarca.setSelectedItem(this.produto.getMarca().toString());
+        }
+        this.jComboBoxMarca.setPreferredSize(new Dimension(200, 20));
+        this.add(new JLabel("Marca: "));
+        this.add(this.jComboBoxMarca);
+
         
         this.jTextFieldPeso          = this.createTextField(5);
         this.jTextFieldPeso.setText(this.produto.getPeso());
@@ -92,6 +104,10 @@ public final class ViewEditarProduto extends ViewEditar {
 
     public JTextField getTextFieldMarca() {
         return this.jTextFieldMarca;
+    }
+
+    public JComboBox getjComboBoxMarca() {
+        return jComboBoxMarca;
     }
 
     public JTextField getTextFieldPeso() {

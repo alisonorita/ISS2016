@@ -83,7 +83,10 @@ public class ControllerViewOperacaoRegistrarPedido extends ControllerViewModal {
                 new ViewMensagem(this.viewOperacaoRegistrarPedido, "Pedido Registrado com Sucesso!").setVisible(true);
                 this.viewOperacaoRegistrarPedido.clear();
             }
-        }else if (oActionEvent.getSource().equals(this.viewOperacaoRegistrarPedido.getButtonAjuda())) {
+        }else if (oActionEvent.getSource().equals(this.viewOperacaoRegistrarPedido.getButtonVoltar())) {
+            this.viewOperacaoRegistrarPedido.dispose();
+        }
+        else if (oActionEvent.getSource().equals(this.viewOperacaoRegistrarPedido.getButtonAjuda())) {
             new ViewAjudaRegistrarPedido(this.viewOperacaoRegistrarPedido).setVisible(true);
         }
     }

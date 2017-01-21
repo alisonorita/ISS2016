@@ -43,11 +43,10 @@ public class ControllerProduto {
     /**
      * Metodo responsavel por verificar se o Produto ja esta cadastrado.
      * @param  sDescricao Descricao do Fornecedor.
-     * @param  sMarca     Marca do Fornecedor.
      * @return Produto e valida para cadastro.
      */
-    public boolean produtoIsAvailable(String sDescricao, String sMarca) {
-        return (this.daoProduto.findProdutoByDescricaoAndMarca(sDescricao, sMarca) == null);
+    public boolean produtoIsAvailable(String sDescricao) {
+        return (this.daoProduto.findProdutoByDescricaoAndMarca(sDescricao) == null);
     }
     
     /**
@@ -75,11 +74,10 @@ public class ControllerProduto {
     /**
      * Metodo responsavel por verificar se na edicao nao atualize com dados ja cadastrados.
      * @param  sDescricao Nome do Produto.
-     * @param  sMarca     Marca do Produto.
      * @param  lId        Id do Produto.
      * @return Atulizacao e valida.
      */
-    public boolean checkUpdate(String sDescricao, String sMarca, Long lId) {
-        return (this.daoProduto.findProdutoByDescricaoAndMarca(sDescricao, sMarca, lId) == null);
+    public boolean checkUpdate(String sDescricao, Long lId) {
+        return (this.daoProduto.findProdutoByDescricaoAndMarca(sDescricao, lId) == null);
     }
 }

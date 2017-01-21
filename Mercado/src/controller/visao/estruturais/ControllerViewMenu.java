@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import net.sf.jasperreports.engine.JRException;
 import relatorios.Relatorio;
 import relatorios.RelatorioDespesas;
+import relatorios.RelatorioProdutosEmEstoque;
 
 import visao.cadastro.ViewCadastroClienteFisico;
 import visao.cadastro.ViewCadastroClienteJuridico;
@@ -125,8 +126,13 @@ public class ControllerViewMenu extends ControllerView {
             new ViewOperacaoGerenciarProduto(this.viewMenu).setVisible(true);
         }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemOperacoesGerenciarUsuario())) {
             new ViewOperacaoGerenciarUsuario(this.viewMenu).setVisible(true);
-        }
-        else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosDespesa())) {
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosProdutosEstoque())) {
+            try {
+                Relatorio oRelatorio = new RelatorioProdutosEmEstoque();
+            } catch (JRException | IOException | SQLException ex) {
+                new ViewErro(this.viewMenu, "Erro na Geracao do Relatorio!").setVisible(true);
+            } 
+        }else if (oEvento.getSource().equals(this.viewMenu.getMenuItemRelatoriosDespesa())) {
             try {
                 Relatorio oRelatorio = new RelatorioDespesas();
             } catch (JRException | IOException | SQLException ex) {

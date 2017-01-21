@@ -26,10 +26,17 @@ public class DaoMarca extends Dao<Marca>{
      * @param  sNome Nome da Marca.
      * @return Marca encontrada.
      */
+    
     public Marca findMarcaByNome(String sNome) {
-        String sSql         = "SELECT e FROM Marca e WHERE e.nome LIKE '" + sNome.toUpperCase().trim() + "'";
-        List<Marca> oMarcas = acesso.createQuery(sSql).getResultList();
-        return (oMarcas.isEmpty() == true) ? null : oMarcas.get(0);
+        List<Marca> oMarcas = this.list();
+        if (oMarcas.isEmpty() == false) {
+            for (Marca oCurrentMarca : oMarcas) {
+                if (oCurrentMarca.toString().toUpperCase().trim().equals(sNome.toUpperCase().trim())) {
+                    return oCurrentMarca;
+                }
+            }
+        }
+        return null;
     }
     
     /**
@@ -67,6 +74,21 @@ public class DaoMarca extends Dao<Marca>{
                     sSql   += "OR e.sigla LIKE '%" + sMarca + "%'";
         List<Marca> oMarcas = acesso.createQuery(sSql).getResultList();
         return      oMarcas;
+    }
+    
+    /**
+     * Metodo responsavel por retornar a lista de marcas cadastradas no sistema
+     * @return Lista de marcas
+     */
+    
+    public String[] getMarcas() {
+        List<Marca> oMarcas    = this.list();
+        String[]     sMarcas    = new String[oMarcas.size() + 1];
+                     sMarcas[0] = "Selecione";
+        for (int i = 0; i < oMarcas.size(); ++i) {
+            sMarcas[i + 1] = oMarcas.get(i).toString();
+        }
+        return sMarcas;
     }
     
     /**

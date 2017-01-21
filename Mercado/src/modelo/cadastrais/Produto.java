@@ -10,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
+import modelo.gerenciais.Marca;
 
 /**
  * <p>Classe de <b>Modelo</b> Produto.</p>
@@ -30,8 +33,9 @@ public class Produto implements Serializable {
     private Long    id;
     @Column (name = "descricao")
     private String  descricao;
-    @Column (name = "marca")
-    private String  marca;
+    @ManyToOne
+    @JoinColumn (name = "marca_id")
+    private Marca  marca;
     @Column (name = "peso")
     private String  peso;
     @Column (name = "quantidade")
@@ -60,9 +64,9 @@ public class Produto implements Serializable {
         this.precoUnitario = (fPrecoUnitario >= 0) ? fPrecoUnitario : 0.0f;
     }
     
-    public Produto(String sDescricao, String sMarca, String sPeso, int iQuantidade, float fPrecoUnitario) {
+    public Produto(String sDescricao, Marca sMarca, String sPeso, int iQuantidade, float fPrecoUnitario) {
         this(sDescricao, iQuantidade, fPrecoUnitario);
-        this.marca = sMarca.toUpperCase().trim();
+        this.marca = sMarca;
         this.peso  = sPeso;
     }
     
@@ -82,12 +86,12 @@ public class Produto implements Serializable {
         this.descricao = sDescricao.toUpperCase().trim();
     }
 
-    public String getMarca() {
+    public Marca getMarca() {
         return this.marca;
     }
 
-    public void setMarca(String sMarca) {
-        this.marca = sMarca.toUpperCase().trim();
+    public void setMarca(Marca sMarca) {
+        this.marca = sMarca;
     }
 
     public String getPeso() {
@@ -134,7 +138,7 @@ public class Produto implements Serializable {
         String[] sProduto    = new String[3];
                  sProduto[0] = this.id.toString();
                  sProduto[1] = this.descricao;
-                 sProduto[2] = this.marca;
+                 sProduto[2] = this.marca.getNome(); 
         return   sProduto;
     }
 

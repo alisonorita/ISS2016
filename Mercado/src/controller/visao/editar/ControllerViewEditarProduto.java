@@ -10,7 +10,9 @@ import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
 import modelo.dao.estruturais.DaoAcao;
 import modelo.dao.estruturais.DaoOperacao;
+import modelo.dao.gerenciais.DaoMarca;
 import modelo.estruturais.Operacao;
+import modelo.gerenciais.Marca;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewEditarProduto.
@@ -46,16 +48,17 @@ public class ControllerViewEditarProduto extends ControllerViewEditar {
     @Override
     protected void save() {
         String sDescricao     = this.viewEditarProduto.getTextFieldDescricao().getText().toUpperCase().trim();
-        String sMarca         = this.viewEditarProduto.getTextFieldMarca().getText().toUpperCase().trim();
+        String sMarca         = this.viewEditarProduto.getjComboBoxMarca().getSelectedItem().toString();
         String sPeso          = this.viewEditarProduto.getTextFieldPeso().getText().trim();
         String sQuantidade    = this.viewEditarProduto.getTextFieldQuantidade().getText().toUpperCase().trim();
         String sPrecoUnitario = this.viewEditarProduto.getTextFieldPrecoUnitario().getText().toUpperCase().trim();
-        if (this.checkParameters(sDescricao, sMarca, sQuantidade, sPrecoUnitario)== true) {
+        if (this.checkParameters(sDescricao, sQuantidade, sPrecoUnitario)== true) {
+            Marca   oMarca         = new DaoMarca().findMarcaByNome(sMarca);
             int     iQuantidade    = Integer.parseInt(sQuantidade);
             float   fPrecoUnitario = Float.parseFloat(sPrecoUnitario);
             Produto oProduto       = this.viewEditarProduto.getProduto();
                     oProduto.setDescricao(sDescricao);
-                    oProduto.setMarca(sMarca);
+                    oProduto.setMarca(oMarca);
                     oProduto.setPeso(sPeso);
                     oProduto.setQuantidade(iQuantidade);
                     oProduto.setPrecoUnitario(fPrecoUnitario);
@@ -67,14 +70,10 @@ public class ControllerViewEditarProduto extends ControllerViewEditar {
         }
     }
     
-    private boolean checkParameters(String sDescricao, String sMarca, String sQuantidade, String sPrecoUnitario) {
+    private boolean checkParameters(String sDescricao, String sQuantidade, String sPrecoUnitario) {
         if (this.controllerProduto.checkDescricao(sDescricao) == false) {
             new ViewErro(this.viewEditarProduto, "Descricao Inválida!").setVisible(true);
             this.viewEditarProduto.getTextFieldDescricao().requestFocus();
-            return false;
-        }else if (this.controllerProduto.checkMarca(sMarca) == false) {
-            new ViewErro(this.viewEditarProduto, "Marca Inválida!").setVisible(true);
-            this.viewEditarProduto.getTextFieldMarca().requestFocus();
             return false;
         }else if (this.controllerProduto.checkQuantidade(sQuantidade) == false) {
             new ViewErro(this.viewEditarProduto, "Quantidade Inválida!").setVisible(true);
@@ -84,11 +83,16 @@ public class ControllerViewEditarProduto extends ControllerViewEditar {
             new ViewErro(this.viewEditarProduto, "Preco Unitario Inválido!").setVisible(true);
             this.viewEditarProduto.getTextFieldPrecoUnitario().requestFocus();
             return false;
-        }else if (this.controllerProduto.checkUpdate(sDescricao, sMarca, this.viewEditarProduto.getProduto().getId()) == false) {
+        }else if (this.controllerProduto.checkUpdate(sDescricao, this.viewEditarProduto.getProduto().getId()) == false) {
             new ViewErro(this.viewEditarProduto, "Produto já Cadastrado!").setVisible(true);
             this.viewEditarProduto.getTextFieldDescricao().requestFocus();
             return false;
+        }else if (this.viewEditarProduto.getjComboBoxMarca().getSelectedIndex() == 0) {
+            new ViewErro(this.viewEditarProduto, "Selecione uma Marca!").setVisible(true);
+            this.viewEditarProduto.getjComboBoxMarca().requestFocus();
+            return false;
         }
+        
         return true;
     }
 }

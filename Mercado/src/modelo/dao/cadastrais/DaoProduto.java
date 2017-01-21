@@ -36,12 +36,10 @@ public class DaoProduto extends Dao<Produto> {
     /**
      * Metodo responsavel por retornar o Produto pela sua Descricao e Marca.
      * @param  sDescricao Descricao do Produto.
-     * @param  sMarca     Marca do Produto.
      * @return Produto encontrado.
      */
-    public Produto findProdutoByDescricaoAndMarca(String sDescricao, String sMarca) {
+    public Produto findProdutoByDescricaoAndMarca(String sDescricao) {
         String        sSql      = "SELECT e FROM Produto e WHERE e.descricao LIKE '" + sDescricao.toUpperCase() + "' ";
-                      sSql     += "AND e.marca LIKE '" + sMarca.toUpperCase() + "'";
         List<Produto> oProdutos = (List<Produto>) acesso.createQuery(sSql).getResultList();
         return (oProdutos.isEmpty() == true) ? null : oProdutos.get(0);
     }
@@ -49,13 +47,11 @@ public class DaoProduto extends Dao<Produto> {
     /**
      * Metodo responsavel por retornar um Produto pelo sua Descricao e Marca e com um Id diferente.
      * @param  sDescricao Descricao do Produto.
-     * @param  sMarca     Marca do Produto.
      * @param  lId        Id do Produto.
      * @return Produto encontrado.
      */
-    public Produto findProdutoByDescricaoAndMarca(String sDescricao, String sMarca, Long lId) {
+    public Produto findProdutoByDescricaoAndMarca(String sDescricao, Long lId) {
         String        sSql      = "SELECT e FROM Produto e WHERE e.descricao LIKE '" + sDescricao.toUpperCase() + "' ";
-                      sSql     += "AND e.marca LIKE '" + sMarca.toUpperCase() + "' ";
                       sSql     += "AND e.id    <>   "  + lId                  + " ";
         List<Produto> oProdutos = (List<Produto>) acesso.createQuery(sSql).getResultList();
         return (oProdutos.isEmpty() == true) ? null : oProdutos.get(0);
@@ -68,7 +64,6 @@ public class DaoProduto extends Dao<Produto> {
      */
     public List<Produto> findProdutos(String sProduto) {
         String        sSql      = "SELECT e FROM Produto e WHERE e.descricao LIKE '%" + sProduto.toUpperCase() + "%' ";
-                      sSql     += "OR e.marca LIKE '%" + sProduto.toUpperCase() + "%'";
         List<Produto> oProdutos = (List<Produto>) acesso.createQuery(sSql).getResultList();
         return oProdutos;
     }

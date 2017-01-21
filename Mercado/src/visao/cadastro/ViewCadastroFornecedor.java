@@ -62,7 +62,7 @@ public final class ViewCadastroFornecedor extends ViewCadastro {
     @Override
     public void clear() {
         this.jTextFieldNome.setText("");
-        this.jTextFieldCNPJ.setText("");
+        this.jTextFieldCNPJ.setText("00.000.000/0000-00");
         this.jTextFieldTelefone.setText("");
         
         this.jTextFieldNome.requestFocus();

@@ -120,9 +120,17 @@ public final class ViewOperacaoRegistrarPedido extends ViewOperacao {
         
         this.addButtons();
         
-        this.jButtonAction2.setVisible(false);
-        this.jButtonAjuda = this.createButton("", "help.jpg");
-        this.add(this.jButtonAjuda);
+    }
+    
+    @Override
+    public void addButtons() {
+        this.jButtonAction1 = this.createButton("Confirmar", "ok.jpg");
+        this.jButtonAction2 = this.createButton("  Voltar ", "back.jpg");
+        this.jButtonAction3 = this.createButton(""         , "help.jpg");
+        
+        this.add(this.jButtonAction1);
+        this.add(this.jButtonAction2);
+        this.add(this.jButtonAction3);
     }
      
     @Override
@@ -186,6 +194,10 @@ public final class ViewOperacaoRegistrarPedido extends ViewOperacao {
 
     public JButton getButtonAjuda() {
         return this.jButtonAjuda;
+    }
+    
+    public JButton getButtonVoltar() {
+        return this.jButtonAction2;
     }
     
     public JTextField getTextFieldDataPagamento() {

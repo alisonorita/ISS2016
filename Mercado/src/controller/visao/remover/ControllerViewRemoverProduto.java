@@ -2,6 +2,7 @@ package controller.visao.remover;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import modelo.dao.cadastrais.DaoProduto;
 import visao.mensagens.ViewMensagem;
 import visao.remover.ViewRemoverProduto;
@@ -38,10 +39,18 @@ public class ControllerViewRemoverProduto extends ControllerViewRemover {
 
     @Override
     protected void remover() {
-        new DaoProduto().remove(this.viewRemoverProduto.getProduto().getId());
-        new DaoOperacao().insert(new Operacao("Produto = " + this.viewRemoverProduto.getProduto().getId(), new DaoAcao().get(27L), this.viewRemoverProduto.getUsuario()));
-        new ViewMensagem(this.viewRemoverProduto.getViewConsulta(), "Produto Removido com Sucesso!").setVisible(true);
-        this.viewRemoverProduto.getViewConsulta().clear();
-        this.viewRemoverProduto.dispose();
+        
+        try{
+            new DaoProduto().remove(this.viewRemoverProduto.getProduto().getId());
+            new DaoOperacao().insert(new Operacao("Produto = " + this.viewRemoverProduto.getProduto().getId(), new DaoAcao().get(27L), this.viewRemoverProduto.getUsuario()));
+            new ViewMensagem(this.viewRemoverProduto.getViewConsulta(), "Produto Removido com Sucesso!").setVisible(true);
+            this.viewRemoverProduto.getViewConsulta().clear();
+            this.viewRemoverProduto.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Não é possível excluir o produto, ele está atrelado a um pedido " +
+                    "registrado no sistema. \nPor favor edite os dados do produto ou selecione outro produto para exclusão.");
+            this.viewRemoverProduto.getViewConsulta().clear();
+            this.viewRemoverProduto.dispose();
+        }
     }
 }

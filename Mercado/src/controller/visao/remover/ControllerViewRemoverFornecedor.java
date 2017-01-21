@@ -2,6 +2,7 @@ package controller.visao.remover;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import modelo.dao.estruturais.DaoAcao;
 import modelo.dao.estruturais.DaoOperacao;
 import modelo.dao.gerenciais.DaoFornecedor;
@@ -38,10 +39,17 @@ public class ControllerViewRemoverFornecedor extends ControllerViewRemover {
 
     @Override
     protected void remover() {
-        new DaoFornecedor().remove(this.viewRemoverFornecedor.getFornecedor().getId());
-        new DaoOperacao().insert(new Operacao("Fornecedor = " + this.viewRemoverFornecedor.getFornecedor().getId(), new DaoAcao().get(21L), this.viewRemoverFornecedor.getUsuario()));
-        new ViewMensagem(this.viewRemoverFornecedor.getViewConsulta(), "Fornecedor Removido com Sucesso!").setVisible(true);
-        this.viewRemoverFornecedor.getViewConsulta().clear();
-        this.viewRemoverFornecedor.dispose();
+        try{
+            new DaoFornecedor().remove(this.viewRemoverFornecedor.getFornecedor().getId());
+            new DaoOperacao().insert(new Operacao("Fornecedor = " + this.viewRemoverFornecedor.getFornecedor().getId(), new DaoAcao().get(21L), this.viewRemoverFornecedor.getUsuario()));
+            new ViewMensagem(this.viewRemoverFornecedor.getViewConsulta(), "Fornecedor Removido com Sucesso!").setVisible(true);
+            this.viewRemoverFornecedor.getViewConsulta().clear();
+            this.viewRemoverFornecedor.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Não é possível excluir o fornecedor, ele está atrelado a um pedido registrado no sistema. " +
+                    "\nPor favor, edite os dados do fornecedor ou escolha outro fornecedor para exclusão.");
+            this.viewRemoverFornecedor.getViewConsulta().clear();
+            this.viewRemoverFornecedor.dispose();
+        }
     }
 }

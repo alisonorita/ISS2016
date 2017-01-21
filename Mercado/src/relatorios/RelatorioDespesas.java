@@ -6,7 +6,6 @@ import net.sf.jasperreports.engine.JRException;
 
 /**
  * Classe responsavel por definir os parametros do Relatorio de Despesas.
- * @since  10/02/2016
  */
 public class RelatorioDespesas extends Relatorio {
     
