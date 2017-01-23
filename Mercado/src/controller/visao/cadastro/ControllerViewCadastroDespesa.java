@@ -63,7 +63,7 @@ public class ControllerViewCadastroDespesa extends ControllerViewCadastro {
         }
     }
     
-    private boolean checkParameters(String sDescricao, String sValor) {
+    public boolean checkParameters(String sDescricao, String sValor) {
         if (this.controllerDespesa.checkDescricao(sDescricao) == false) {
             this.viewCadastroDespesa.setErro("Descricao Inválida!");
             new ViewErro(this.viewCadastroDespesa, "Descricao Inválida!").setVisible(true);
